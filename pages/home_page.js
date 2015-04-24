@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native')
+var Dashboard = require('./dashboard')
 
 var {
   StyleSheet,
@@ -12,8 +13,8 @@ var {
 var HomePage = React.createClass({
   nextPage: function() {
     this.props.toRoute({
-      name: 'New screen',
-      component: HomePage,
+      name: 'Dashboard',
+      component: Dashboard,
     })
   },
 
