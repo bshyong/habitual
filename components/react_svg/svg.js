@@ -53,7 +53,6 @@ var Svg = React.createClass({
 
   render() {
     var nativeProps = {
-      src: null,
       data: null,
       style: this.props.style,
       originalWidth: this.props.width,
@@ -61,14 +60,11 @@ var Svg = React.createClass({
       forceUpdate: this.props.forceUpdate,
     };
 
-    if (this.props.source) {
-      nativeProps.src = this.props.source.uri;
-    } else if (this.props.data) {
+    if (this.props.data) {
       nativeProps.data = this.props.data;
     } else {
       nativeProps.data = this.stateFromChildren();
     }
-
     return <RNSvg {...nativeProps} />
   },
 });
@@ -76,7 +72,7 @@ var Svg = React.createClass({
 var deepDiffer = require('deepDiffer');
 
 var RNSvg = createReactIOSNativeComponentClass({
-  validAttributes: merge(ReactIOSViewAttributes.UIView, {src: true, data: {differ: deepDiffer}, originalWidth: true, originalHeight: true, forceUpdate: true}),
+  validAttributes: merge(ReactIOSViewAttributes.UIView, {data: {differ: deepDiffer}, originalWidth: true, originalHeight: true, forceUpdate: true}),
   uiViewClassName: 'RNSvg',
 });
 
