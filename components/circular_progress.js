@@ -16,8 +16,13 @@ var CircularProgress = React.createClass({
 
   getDefaultProps() {
     return {
-      radius: 50,
-      text: '',
+      radius: 50
+    }
+  },
+
+  getInitialState() {
+    return {
+      progress: 0
     }
   },
 
@@ -42,19 +47,21 @@ var CircularProgress = React.createClass({
   //   return path;
   // },
 
+  renderSvg() {
+    var circumference = 2 * this.props.radius * Math.PI
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="${this.props.radius * 2}px" height="${this.props.radius * 2}px">
+      <circle r="${this.props.radius * 0.8}" cx="${this.props.radius}" cy="${this.props.radius}" fill="none" stroke="#333" stroke-width="${this.props.radius / 7}px" stroke-dasharray="${circumference}" stroke-dashoffset="${100}" />
+      <circle r="${this.props.radius * 0.8}" cx="${this.props.radius}" cy="${this.props.radius}" fill="none" stroke="#FF9F1E" stroke-width="${this.props.radius / 7}px" stroke-dasharray="${circumference}" stroke-dashoffset="${100}" />
+    </svg>`
+  },
+
   render() {
     return (
       <View>
         <Svg  width={this.props.radius * 2}
               height={this.props.radius * 2}
-              style={{width: this.props.radius * 2, height: this.props.radius * 2}} >
-          <Circle radius={this.props.radius * 0.8}
-                  cx={this.props.radius}
-                  cy={this.props.radius}
-                  fill="none"
-                  stroke="#FF9F1E"
-                  strokeWidth={this.props.radius / 7} />
-        </Svg>
+              style={{width: this.props.radius * 2, height: this.props.radius * 2}}
+              data={this.renderSvg()} />
       </View>
     );
   }
