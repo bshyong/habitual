@@ -29,7 +29,11 @@ var Svg = React.createClass({
     Path: function(path) {
       var { fill, stroke, strokeWidth, strokeMiterLimit, d, transform } = path.props;
       return `<path fill="${fill}" stroke="${stroke}" stroke-width="${strokeWidth}" d="${d}" transform="${transform}"/>`
-    }
+    },
+    Circle: function(circle) {
+      var { radius, cx, cy, fill, stroke, strokeWidth } = circle.props
+      return `<circle r="${radius}" cx="${cx}" cy="${cy}" fill="${fill}" stroke="${stroke}" stroke-width="${strokeWidth}px" />`
+    },
   },
 
   getInitialState() {
@@ -48,14 +52,7 @@ var Svg = React.createClass({
     });
 
     data = data + "</svg>"
-    return data;
-  },
 
-  circleRender(): ?string{
-    var data = `<svg xmlns="http://www.w3.org/2000/svg" width="${this.props.width}px" height="${this.props.height}px">`
-    data = data + `<circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0" stroke="#333" stroke-width="2px"></circle>
-  <circle id="bar" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke="#FF9F1E" stroke-width="5px" stroke-dashoffset="0"></circle>
-          </svg>`
     return data;
   },
 
@@ -67,12 +64,11 @@ var Svg = React.createClass({
       originalHeight: this.props.height,
       forceUpdate: this.props.forceUpdate,
     };
-    nativeProps.data = this.circleRender();
-    // if (this.props.data) {
-    //   nativeProps.data = this.props.data;
-    // } else {
-    //   nativeProps.data = this.stateFromChildren();
-    // }
+    if (this.props.data) {
+      nativeProps.data = this.props.data;
+    } else {
+      nativeProps.data = this.stateFromChildren();
+    }
     return <RNSvg {...nativeProps} />
   },
 });
@@ -80,7 +76,7 @@ var Svg = React.createClass({
 var deepDiffer = require('deepDiffer');
 
 var RNSvg = createReactIOSNativeComponentClass({
-  validAttributes: merge(ReactIOSViewAttributes.UIView, {data: {differ: deepDiffer}, originalWidth: true, originalHeight: true, forceUpdate: true}),
+  validAttributes: merge(ReactIOSViewAttributes.UIView, {data: {differ: deepDiffer}}),
   uiViewClassName: 'RNSvg',
 });
 

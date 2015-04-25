@@ -70,6 +70,7 @@
   // Create the view and render it
   [_image setSize:newSize];
   _imageView = [[SVGKFastImageView alloc] initWithSVGKImage:_image];
+  _imageView.backgroundColor = [UIColor clearColor];
   [self addSubview:_imageView];
 }
 
