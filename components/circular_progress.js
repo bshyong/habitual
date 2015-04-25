@@ -40,10 +40,12 @@ var CircularProgress = React.createClass({
   },
 
   render() {
+    var circleData = `<circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0" stroke="#333" stroke-width="2px"></circle>
+  <circle id="bar" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke="#FF9F1E" stroke-width="2px" stroke-dashoffset="0"></circle>`
     return (
-      <View style={{backgroundColor: 'black'}}>
+      <View style={{backgroundColor: 'white'}}>
         <Svg width={320} height={300} style={{width: 320, height: 300}}
-             forceUpdate={this.state.t.toString()}>
+             forceUpdate={this.state.t.toString()} data={circleData}>
           <Path fill="none" stroke="#00D8FF" strokeWidth="3" strokeMiterlimit="10"
                 d={this.drawSine(this.state.t)} />
         </Svg>
